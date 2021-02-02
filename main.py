@@ -12,28 +12,28 @@ import pyotp
 from selenium import webdriver
 import time
 
-totp = pyotp.TOTP("My2factorAppHere").now()
-login = r.login(config.USERNAME, config.PASSWORD, mfa_code=totp)
+# totp = pyotp.TOTP("My2factorAppHere").now()
+# login = r.login(config.USERNAME, config.PASSWORD, mfa_code=totp)
 
 # my_stocks = holdings.stocks
-my_stocks = r.build_holdings()
+# my_stocks = r.build_holdings()
 
 PATH = "/home/hopper/chromedriver"
 
-# stocks = ['AMC', 'AMD', 'AMZN', 'BABA', 'BB', 'BSIG', 'CFII', 'CVX', 'DAL', 'EPD', 'ETSY', 'FB', 'GOOGL', 'KO', 'LAC', 'MSFT', 'NIO', 'NTDOY', 'NVDA', 'POWW', 'QQQ', 'RCL', 'RTX', 'SNDL', 'SPY', 'SQ', 'TEVA']
+my_stocks = ['AMC', 'AMD', 'AMZN', 'BABA', 'BB', 'BSIG', 'CFII', 'CVX', 'DAL', 'EPD', 'ETSY', 'FB', 'GOOGL', 'KO', 'LAC', 'MSFT', 'NIO', 'NTDOY', 'NVDA', 'POWW', 'QQQ', 'RCL', 'RTX', 'SNDL', 'SPY', 'SQ', 'TEVA']
 # Stopped at EPD
 
-holdingsFile = open("holdings.py", "a")
-holdingsFile.write(str(my_stocks))
-holdingsFile.close()
+# holdingsFile = open("holdings.py", "a")
+# holdingsFile.write(str(my_stocks))
+# holdingsFile.close()
 
 soldFile = open("sold.py", "a")
 
 
 soldStocks = []
 
-for stock, data in my_stocks.items():
-# for stock in stocks:
+# for stock, data in my_stocks.items():
+for stock in my_stocks:
     driver = webdriver.Chrome(PATH)
     driver.get('https://financhill.com/search/stock-score/' + stock)
     time.sleep(2)
@@ -43,9 +43,9 @@ for stock, data in my_stocks.items():
     score = int(driver.find_element_by_tag_name('h2').text)
     print(score)
 
-    if (score < 40):
-        r.order_sell_trailing_stop(stock, data['quantity'], 1)
-        soldStocks.append(stock)
+    # if (score < 40):
+    #     r.order_sell_trailing_stop(stock, data['quantity'], 1)
+    #     soldStocks.append(stock)
 
     driver.quit()
 soldFile.write(soldStocks)
