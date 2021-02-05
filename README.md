@@ -5,6 +5,9 @@ This is an algorithmic trading project to use <Financhill.com> to execute trades
 ### Plan
 
 1. Scrape top stocks listed on Financhill:
+    - https://financhill.com/screen/stock-score
+
+    or
 
    - https://financhill.com/lists/most-heavily-shorted-stocks-todayfinanchill
 

@@ -32,32 +32,3 @@ r = c.get_price_history(
 )
 assert r.status_code == 200, r.raise_for_status()
 print(json.dumps(r.json(), indent=4))
-
-soldFile = open("sold.py", "a")
-
-soldStocks = []
-
-# for stock, data in my_stocks.items():
-for stock in my_stocks:
-    driver = webdriver.Chrome(PATH)
-    driver.get('https://financhill.com/search/stock-score/' + stock)
-
-    score = int(driver.find_element_by_tag_name('h2').text)
-    
-    time.sleep(2)
-
-    print(stock)
-    print(score)
-
-    # if (score < 40):
-    #     r.order_sell_trailing_stop(stock, data['quantity'], 1)
-    #     soldStocks.append(stock)
-
-    driver.quit()
-soldFile.write(soldStocks)
-soldFile.close()
-
-
-<span class="sort sort-desc" data-sort-name="stock_score_normalized" data-current-order="">
-								Stock Score																<i class="glyphicon"></i>
-							</span>
